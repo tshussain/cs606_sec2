@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'DisplayPetPage.dart';
 import 'database/DBHelper.dart';
 
 class ChoosePetPage extends StatefulWidget {
@@ -66,7 +67,15 @@ class _ChoosePetPageState extends State<ChoosePetPage> {
               },
             ),
           ),
-          Text("You have chosen pet " + _selectedItem.toString())
+          Text("You have chosen pet " + _selectedItem.toString()),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(
+                      builder: (context) => DisplayPetPage(_selectedItem)));
+            }
+
+          )
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:cs606_sec2/DisplayPetRecordsPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
 import 'AnotherPage.dart';
 import 'ChoosePetPage.dart';
@@ -48,9 +49,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-   @override
+  @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -59,37 +59,70 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Center(
           child: Column(
             children: [
-
-
-
-
-
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EnterPetRecordPage()));
-                },
-                child: Text("Enter Pet Record")
-              ),
+              ResponsiveGridRow(children: [
+                ResponsiveGridCol(
+                    xs: 6,
+                    md: 12,
+                    child: Container(
+                      color: Colors.pink,
+                      height: 100,
+                    )),
+                ResponsiveGridCol(
+                  xs: 6,
+                  md: 12,
+                  child: Container(color: Colors.green, height: 100),
+                )
+              ]),
+              ResponsiveGridRow(children: [
+                ResponsiveGridCol(
+                    md: 6,
+                    lg: 3,
+                    child: Container(
+                      color: Colors.blue,
+                      height: 100,
+                    )),
+                ResponsiveGridCol(
+                    md: 6,
+                    lg: 3,
+                    child: Container(color: Colors.red, height: 100)),
+                ResponsiveGridCol(
+                    md: 6,
+                    lg: 3,
+                    child: Container(
+                      color: Colors.orange,
+                      height: 100,
+                    )),
+                ResponsiveGridCol(
+                    md: 6,
+                    lg: 3,
+                    child: Container(color: Colors.purple, height: 100))
+              ]),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EnterPetRecordPage()));
+                  },
+                  child: Text("Enter Pet Record")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
                         MaterialPageRoute(
                             builder: (context) => DisplayPetRecordsPage()));
                   },
-                  child: Text("Display Pet Records")
-              ),
+                  child: Text("Display Pet Records")),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
+                    Navigator.push(
+                        context,
                         MaterialPageRoute(
                             builder: (context) => ChoosePetPage()));
                   },
-                  child: Text("Choose Pet")
-              ),
+                  child: Text("Choose Pet")),
             ],
           ),
-
         ),
       ),
     );

@@ -23,6 +23,9 @@ class PetRecord {
     return 'PetRecord{_petName: $_petName, _petAge: $_petAge}';
   }
 
+  /// Need to add == so that DropdownButton will be able to use
+  ///  PetRecord properly.
+  ///  (Note:  Use the IDE to automatically generate this method.)
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
