@@ -63,10 +63,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 ResponsiveGridCol(
                     xs: 6,
                     md: 12,
-                    child: Container(
-                      color: Colors.pink,
-                      height: 100,
-                    )),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EnterPetRecordPage()));
+                        },
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            // Use BoxFit.fitWidth inside of BoxDecoration to automatically
+                            // size image to fit container it is in.  Lets it scale nicely
+                            // on different sized screens as part of responsive design.
+                            Container(
+                              height: 100,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/pug.jpg"),
+                                  fit: BoxFit.fitWidth
+                                )
+                              )
+                            ),
+
+                            Text("Enter Pet record")
+                          ],
+                        ))),
                 ResponsiveGridCol(
                   xs: 6,
                   md: 12,
