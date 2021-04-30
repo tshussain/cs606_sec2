@@ -1,9 +1,10 @@
+import 'package:cs606_sec2/database/DBHelper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'model/PetRecord.dart';
 
-//stful
+//stful  shortcut to get class started
 
 class EnterPetRecordPage extends StatefulWidget {
   @override
@@ -69,6 +70,9 @@ class _EnterPetRecordPageState extends State<EnterPetRecordPage> {
       _formKey.currentState.save();
 
       PetRecord petRecord = new PetRecord(_petName, _petAge);
+
+      DBHelper dbHelper = new DBHelper(); // use singleton pattern
+      dbHelper.savePetRecord(petRecord);
       print(petRecord);
     } else {
       print("Form data not valid.");

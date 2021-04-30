@@ -23,6 +23,8 @@ environment:
 dependencies:
   imagebutton: ^0.0.6
   responsive_grid: ^2.0.0
+  sqflite:
+  path_provider:
 
   flutter:
     sdk: flutter

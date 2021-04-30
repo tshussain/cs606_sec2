@@ -1,8 +1,10 @@
+import 'package:cs606_sec2/DisplayPetRecordsPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
 
 import 'AnotherPage.dart';
+import 'ChoosePetPage.dart';
 import 'DogListPage.dart';
 import 'EnterPetRecordPage.dart';
 import 'MixItUp.dart';
@@ -57,12 +59,33 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Center(
           child: Column(
             children: [
+
+
+
+
+
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => EnterPetRecordPage()));
                 },
                 child: Text("Enter Pet Record")
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(
+                            builder: (context) => DisplayPetRecordsPage()));
+                  },
+                  child: Text("Display Pet Records")
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(
+                            builder: (context) => ChoosePetPage()));
+                  },
+                  child: Text("Choose Pet")
               ),
             ],
           ),

@@ -22,4 +22,15 @@ class PetRecord {
   String toString() {
     return 'PetRecord{_petName: $_petName, _petAge: $_petAge}';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PetRecord &&
+          runtimeType == other.runtimeType &&
+          _petName == other._petName &&
+          _petAge == other._petAge;
+
+  @override
+  int get hashCode => _petName.hashCode ^ _petAge.hashCode;
 }
