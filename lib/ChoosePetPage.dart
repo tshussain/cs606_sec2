@@ -7,20 +7,19 @@ import 'dart:async';
 
 import 'DisplayPetPage.dart';
 import 'database/DBHelper.dart';
+import 'model/Owner.dart';
 
 class ChoosePetPage extends StatefulWidget {
+  Owner _owner;
+
+  ChoosePetPage(this._owner);
+
   @override
   _ChoosePetPageState createState() => _ChoosePetPageState();
 }
 
 class _ChoosePetPageState extends State<ChoosePetPage> {
   PetRecord _selectedItem;
-
-  // void updateState(List<DropdownMenuItem<PetRecord>> menuItems) {
-  //   setState(() {
-  //     _selectedItem = menuItems[0].value;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,8 @@ class _ChoosePetPageState extends State<ChoosePetPage> {
           new Container(
             padding: new EdgeInsets.all(16.0),
             child: new FutureBuilder<List<PetRecord>>(
-              future: fetchPetRecordsFromDatabase(),
+              future: widget._owner == null ? fetchPetRecordsFromDatabase() :
+                                   fetchOwnerPetsFromDatabase(widget._owner),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<DropdownMenuItem<PetRecord>> menuItems =
@@ -87,6 +87,15 @@ Future<List<PetRecord>> fetchPetRecordsFromDatabase() async {
   Future<List<PetRecord>> petRecords = dbHelper.getPetRecords();
   return petRecords;
 }
+
+
+
+Future<List<PetRecord>> fetchOwnerPetsFromDatabase(Owner owner) async {
+  var dbHelper = DBHelper();
+  Future<List<PetRecord>> petRecords = dbHelper.getOwnerPets(owner.id);
+  return petRecords;
+}
+
 
 /// Create a list of drop-down menu items, one per pet
 List<DropdownMenuItem<PetRecord>> buildDropDown(List<PetRecord> petRecords) {

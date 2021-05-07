@@ -2,7 +2,9 @@ import 'package:cs606_sec2/database/DBHelper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'model/Owner.dart';
 import 'model/PetRecord.dart';
+import 'model/Purchase.dart';
 
 //stful  shortcut to get class started
 
@@ -64,16 +66,47 @@ class _EnterPetRecordPageState extends State<EnterPetRecordPage> {
     );
   }
 
-  void _saveForm() {
+  void _saveForm() async {
     // Validate returns true if the form is valid, or false otherwise.
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
-      PetRecord petRecord = new PetRecord(_petName, _petAge);
+      PetRecord petRecord = new PetRecord.generate(_petName, _petAge);
 
       DBHelper dbHelper = new DBHelper(); // use singleton pattern
       dbHelper.savePetRecord(petRecord);
       print(petRecord);
+
+      /* The rest of this is a temprorary hack to test the join table by populating the owner and purchase tables with data
+       */
+
+      PetRecord petRecord2 = PetRecord.generate(_petName+"2", _petAge);
+      dbHelper.savePetRecord(petRecord2);
+      print(petRecord2);
+
+      Owner owner = Owner.generate("bob");
+      dbHelper.saveOwner(owner);
+      Purchase purchase = Purchase.generate(petRecord, owner);
+      dbHelper.savePurchase(purchase);
+
+      Owner owner2 = Owner.generate("fred");
+      dbHelper.saveOwner(owner2);
+      Purchase purchase2 = Purchase.generate(petRecord2, owner2);
+      dbHelper.savePurchase(purchase2);
+
+
+      List<PetRecord> results = await dbHelper.getPetRecords();
+      print(results.length);
+      List<Owner> results2 = await dbHelper.getOwners();
+      print(results2.length);
+      List<Purchase> results4 = await dbHelper.getPurchases();
+      List<PetRecord> results3 = await dbHelper.getOwnerPets(owner.id);
+      print(results3.length);
+
+
+
+
+
     } else {
       print("Form data not valid.");
     }

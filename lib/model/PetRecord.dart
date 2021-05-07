@@ -1,18 +1,27 @@
 
 
 class PetRecord {
+  int _id;
   String _petName;
   int _petAge;
 
-  PetRecord(this._petName, this._petAge);
+  PetRecord(this._id, this._petName, this._petAge);
+
+  // Named constructor
+  PetRecord.generate(this._petName, this._petAge) {
+    DateTime now = DateTime.now();
+    this._id = now.hashCode;
+  }
 
   String get petName => _petName;
+
+  int get petAge => _petAge;
+
+  int get id => _id;
 
   set petName(String value) {
     _petName = value;
   }
-
-  int get petAge => _petAge;
 
   set petAge(int value) {
     _petAge = value;

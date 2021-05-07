@@ -8,8 +8,10 @@ import 'AnotherPage.dart';
 import 'ChoosePetPage.dart';
 import 'DogListPage.dart';
 import 'EnterPetRecordPage.dart';
+import 'GetOwnerPetPage.dart';
 import 'MixItUp.dart';
 import 'Vehicle.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -140,9 +142,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ChoosePetPage()));
+                            builder: (context) => ChoosePetPage(null)));
                   },
                   child: Text("Choose Pet")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => GetOwnerPetPage()));
+                  },
+                  child: Text("Get Owner's Pets")),
             ],
           ),
         ),
