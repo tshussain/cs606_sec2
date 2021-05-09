@@ -22,7 +22,14 @@ class _DisplayPetRecordsPageState extends State<DisplayPetRecordsPage> {
         child: new FutureBuilder<List<PetRecord>>(
           future: fetchPetRecordsFromDatabase(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
+            if (!snapshot.hasData || snapshot.data == null) {
+              return new Container(
+                alignment: AlignmentDirectional.center,
+                child: new CircularProgressIndicator(),
+              );
+            } else if (snapshot.data.length == 0) {
+              return new Text("No Data found");
+            } else if (snapshot.hasData) {
               return new ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
@@ -38,10 +45,11 @@ class _DisplayPetRecordsPageState extends State<DisplayPetRecordsPage> {
                           new Divider()
                         ]);
                   });
-            } else if (snapshot.data.length == 0) {
-              return new Text("No Data found");
             }
-            return new Container(alignment: AlignmentDirectional.center,child: new CircularProgressIndicator(),);
+            return new Container(
+              alignment: AlignmentDirectional.center,
+              child: new CircularProgressIndicator(),
+            );
           },
         ),
       ),
